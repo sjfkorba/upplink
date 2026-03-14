@@ -268,28 +268,40 @@ export default function Home() {
 }
 
 // 🔥 CLEAN CITY CARD COMPONENT
-function CityCard({ href, title, desc, Icon, color }: {
-  href: string;
-  title: string;
-  desc: string;
-  Icon: any;
-  color: string;
-}) {
+const colorStyles: Record<string, string> = {
+  indigo: "from-indigo-500 to-indigo-600 text-indigo-600",
+  emerald: "from-emerald-500 to-emerald-600 text-emerald-600",
+  orange: "from-orange-500 to-orange-600 text-orange-600",
+  blue: "from-blue-500 to-blue-600 text-blue-600",
+  purple: "from-purple-500 to-purple-600 text-purple-600",
+  slate: "from-slate-500 to-slate-600 text-slate-600",
+  yellow: "from-yellow-500 to-yellow-600 text-yellow-600",
+  teal: "from-teal-500 to-teal-600 text-teal-600"
+};
+
+function CityCard({ href, title, desc, Icon, color }: any) {
+  const style = colorStyles[color] || colorStyles.indigo;
+
   return (
     <Link href={href} className="group h-full">
-      <div className="group bg-white/95 backdrop-blur-xl rounded-4xl p-8 lg:p-10 border-2 border-slate-100/60 hover:shadow-4xl hover:shadow-indigo-200/50 hover:-translate-y-4 hover:border-indigo-300/70 transition-all duration-700 h-full flex flex-col shadow-2xl hover:shadow-3xl">
-        <div className={`w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-${color}-500 to-${color}-600 rounded-4xl flex items-center justify-center mb-8 lg:mb-10 shadow-3xl group-hover:scale-110 transition-all duration-700 flex-shrink-0`}>
-          <Icon className="w-10 h-10 lg:w-12 lg:h-12 text-white drop-shadow-2xl" />
+      <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl hover:shadow-2xl transition-all h-full flex flex-col">
+
+        <div className={`w-20 h-20 bg-gradient-to-br ${style} rounded-3xl flex items-center justify-center mb-6`}>
+          <Icon className="w-10 h-10 text-white" />
         </div>
-        <h3 className={`text-2xl lg:text-3xl font-black text-slate-900 mb-6 lg:mb-8 leading-tight group-hover:text-${color}-600 transition-all duration-500`}>
+
+        <h3 className="text-2xl font-black text-slate-900 mb-4">
           {title}
         </h3>
-        <p className="text-lg lg:text-xl text-slate-600 font-semibold leading-relaxed mb-10 lg:mb-12 flex-grow">
+
+        <p className="text-slate-600 mb-6 flex-grow">
           {desc}
         </p>
-        <span className={`inline-flex items-center gap-3 text-${color}-600 font-black uppercase tracking-[0.2em] text-lg group-hover:translate-x-4 transition-all duration-500`}>
+
+        <span className="font-bold text-sm uppercase tracking-widest">
           Explore →
         </span>
+
       </div>
     </Link>
   );
