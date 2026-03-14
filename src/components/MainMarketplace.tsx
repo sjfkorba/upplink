@@ -52,7 +52,7 @@ export default function MainMarketplace({ allListings = [] }: { allListings?: an
   onSearch={(val: string) => setSearchQuery(val)} 
 />
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-50/50 rounded-full blur-[120px] -z-10"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-indigo-50/50 rounded-full blur-[120px] -z-10"></div>
       </section>
 
       {/* 2. SMART CATEGORY BAR */}
@@ -84,7 +84,7 @@ export default function MainMarketplace({ allListings = [] }: { allListings?: an
         {/* NATIVE AD SLOT */}
         <div className="h-60 bg-white border-2 border-dashed border-slate-100 rounded-[3rem] flex flex-col items-center justify-center relative group overflow-hidden">
             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">Google Adsense Slot</p>
-            <p className="text-xs text-slate-200 italic mt-2 font-bold italic">Premium Monetization Area</p>
+            <p className="text-xs text-slate-200 mt-2 font-bold italic">Premium Monetization Area</p>
             <div className="absolute inset-0 bg-indigo-50/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
         </div>
 
@@ -92,7 +92,7 @@ export default function MainMarketplace({ allListings = [] }: { allListings?: an
         <section>
           <div className="flex items-center gap-4 mb-12">
             <h2 className="text-4xl font-black italic uppercase tracking-tighter">Recent Adds</h2>
-            <div className="h-[2px] flex-1 bg-slate-100"></div>
+            <div className="h-0.5 flex-1 bg-slate-100"></div>
             <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{filtered.length} Units</span>
           </div>
           

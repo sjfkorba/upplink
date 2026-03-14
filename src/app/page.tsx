@@ -39,7 +39,7 @@ export default function Home() {
   const businessCount = allListings.filter(l => l.type === 'business').length || 0;
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 pt-32">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-slate-50 via-white to-indigo-50/30 pt-32">
       <div className="text-center p-12">
         <div className="w-24 h-24 border-4 border-indigo-100 border-t-indigo-600 rounded-3xl animate-spin mx-auto mb-8 shadow-2xl"></div>
         <p className="font-black text-2xl text-slate-700 uppercase tracking-wide">Loading Premium Listings...</p>
@@ -48,21 +48,21 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 pt-32 lg:pt-40">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-indigo-50/30 pt-32 lg:pt-40">
       
       {/* 🔥 HERO SECTION - CLEAN DETAIL STYLE */}
       <section className="px-6 lg:px-12 pb-24 lg:pb-32">
         <div className="max-w-7xl mx-auto text-center">
           
           {/* 🔥 SINGLE LINE BADGE */}
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 text-white px-8 py-4 rounded-3xl text-lg font-black uppercase tracking-wide mb-12 shadow-3xl border border-indigo-500/30 mx-auto">
+          <div className="inline-flex items-center gap-3 bg-linear-to-r from-indigo-600 via-indigo-700 to-purple-700 text-white px-8 py-4 rounded-3xl text-lg font-black uppercase tracking-wide mb-12 shadow-3xl border border-indigo-500/30 mx-auto">
             <Sparkles className="w-6 h-6" />
             MP & CG Verified Marketplace
           </div>
 
           {/* 🔥 CLEAN H1 - DETAIL PAGE STYLE */}
           <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black text-slate-900 leading-tight mb-8 lg:mb-12 drop-shadow-xl">
-            UPP<span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">LINK</span>
+            UPP<span className="bg-linear-to-r from-indigo-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">LINK</span>
           </h1>
 
           {/* 🔥 CLEAN STATS */}
@@ -87,7 +87,7 @@ export default function Home() {
                 <select 
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
-                  className="px-8 py-5 lg:py-6 bg-gradient-to-r from-indigo-50 to-purple-50 border-2 border-slate-100 rounded-2xl font-semibold text-xl focus:border-indigo-300 shadow-lg hover:border-slate-200"
+                  className="px-8 py-5 lg:py-6 bg-linear-to-r from-indigo-50 to-purple-50 border-2 border-slate-100 rounded-2xl font-semibold text-xl focus:border-indigo-300 shadow-lg hover:border-slate-200"
                 >
                   <option>All ({allListings.length.toLocaleString()})</option>
                   <option>Cars ({carCount.toLocaleString()})</option>
@@ -96,7 +96,7 @@ export default function Home() {
                 
                 <button 
                   onClick={() => {setFilter("all"); setSearchQuery("");}}
-                  className="px-12 py-5 lg:py-6 bg-gradient-to-r from-slate-900 to-indigo-900 text-white font-black uppercase tracking-wide text-xl rounded-2xl shadow-3xl hover:shadow-4xl hover:from-indigo-900 hover:to-purple-900 transition-all whitespace-nowrap flex-shrink-0"
+                  className="px-12 py-5 lg:py-6 bg-linear-to-r from-slate-900 to-indigo-900 text-white font-black uppercase tracking-wide text-xl rounded-2xl shadow-3xl hover:shadow-4xl hover:from-indigo-900 hover:to-purple-900 transition-all whitespace-nowrap shrink-0"
                 >
                   Explore
                 </button>
@@ -122,7 +122,7 @@ export default function Home() {
                 onClick={() => setFilter(cat.id)}
                 className={`group relative w-28 h-28 lg:w-36 lg:h-36 rounded-3xl shadow-2xl border-4 p-6 lg:p-8 transition-all duration-500 hover:shadow-4xl hover:scale-105 hover:-translate-y-3 ${
                   isActive
-                    ? `bg-gradient-to-br from-${cat.color}-500 to-${cat.color}-600 border-${cat.color}-400 shadow-${cat.color}-300/60`
+                    ? `bg-linear-to-br from-${cat.color}-500 to-${cat.color}-600 border-${cat.color}-400 shadow-${cat.color}-300/60`
                     : 'bg-white/90 border-slate-200/60 hover:border-slate-300 hover:bg-white'
                 }`}
               >
@@ -162,7 +162,7 @@ export default function Home() {
         {premium.length > 0 && (
           <section className="mb-32 lg:mb-40">
             <div className="flex items-center gap-6 mb-16 lg:mb-20">
-              <div className="w-4 h-24 lg:w-5 lg:h-28 bg-gradient-to-b from-amber-500 to-orange-600 rounded-3xl shadow-xl"></div>
+              <div className="w-4 h-24 lg:w-5 lg:h-28 bg-linear-to-b from-amber-500 to-orange-600 rounded-3xl shadow-xl"></div>
               <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 leading-tight">
                 Premium Deals
               </h2>
@@ -178,7 +178,7 @@ export default function Home() {
         {/* 🔥 REGULAR SECTION */}
         <section>
           <div className="flex items-center gap-6 mb-16 lg:mb-20">
-            <div className="w-4 h-24 lg:w-5 lg:h-28 bg-gradient-to-b from-indigo-500 to-purple-600 rounded-3xl shadow-xl"></div>
+            <div className="w-4 h-24 lg:w-5 lg:h-28 bg-linear-to-b from-indigo-500 to-purple-600 rounded-3xl shadow-xl"></div>
             <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 leading-tight">
               Latest Listings
             </h2>
@@ -193,7 +193,7 @@ export default function Home() {
               </p>
               <button 
                 onClick={() => {setFilter('all'); setSearchQuery('');}}
-                className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-12 lg:px-16 py-6 lg:py-8 rounded-3xl font-black uppercase tracking-wide text-xl shadow-3xl hover:shadow-4xl transition-all flex items-center gap-3 mx-auto"
+                className="bg-linear-to-r from-indigo-600 to-purple-700 text-white px-12 lg:px-16 py-6 lg:py-8 rounded-3xl font-black uppercase tracking-wide text-xl shadow-3xl hover:shadow-4xl transition-all flex items-center gap-3 mx-auto"
               >
                 Reset Filters
                 <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
@@ -210,7 +210,7 @@ export default function Home() {
       </div>
 
       {/* 🔥 SEO CITIES - CLEAN DETAIL STYLE */}
-      <section className="py-32 lg:py-40 bg-gradient-to-br from-slate-50/50 via-indigo-50/30 to-emerald-50/30">
+      <section className="py-32 lg:py-40 bg-linear-to-br from-slate-50/50 via-indigo-50/30 to-emerald-50/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           
           {/* 🔥 MP CITIES */}
@@ -250,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* 🔥 CLEAN FOOTER */}
-      <footer className="bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-900 text-white py-24 lg:py-32 text-center border-t-8 border-slate-800/50">
+      <footer className="bg-linear-to-r from-slate-900 via-indigo-900 to-slate-900 text-white py-24 lg:py-32 text-center border-t-8 border-slate-800/50">
         <div className="max-w-4xl mx-auto px-6 lg:px-12">
           <h3 className="text-4xl lg:text-6xl font-black text-white mb-8 lg:mb-12 drop-shadow-2xl leading-tight">
             UPP-LINK 2026
@@ -286,7 +286,7 @@ function CityCard({ href, title, desc, Icon, color }: any) {
     <Link href={href} className="group h-full">
       <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl hover:shadow-2xl transition-all h-full flex flex-col">
 
-        <div className={`w-20 h-20 bg-gradient-to-br ${style} rounded-3xl flex items-center justify-center mb-6`}>
+        <div className={`w-20 h-20 bg-linear-to-br ${style} rounded-3xl flex items-center justify-center mb-6`}>
           <Icon className="w-10 h-10 text-white" />
         </div>
 
@@ -294,7 +294,7 @@ function CityCard({ href, title, desc, Icon, color }: any) {
           {title}
         </h3>
 
-        <p className="text-slate-600 mb-6 flex-grow">
+        <p className="text-slate-600 mb-6 grow">
           {desc}
         </p>
 

@@ -14,7 +14,7 @@ export default function HeroSearch({ onSearch, currentValue }: HeroSearchProps) 
       <div className="flex flex-col md:flex-row items-stretch bg-white rounded-[2.5rem] p-2 shadow-[0_40px_100px_-20px_rgba(79,70,229,0.15)] border border-slate-50 transition-all focus-within:ring-8 focus-within:ring-indigo-50/50">
         
         {/* KEYWORD SECTION */}
-        <div className="flex-[2] flex items-center px-8 gap-4 py-4 md:py-0 border-b md:border-b-0 md:border-r border-slate-100 group">
+        <div className="flex-2 flex items-center px-8 gap-4 py-4 md:py-0 border-b md:border-b-0 md:border-r border-slate-100 group">
           <Search className="text-indigo-600 transition-transform group-focus-within:scale-110" size={24} strokeWidth={3} />
           <div className="flex flex-col flex-1">
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 leading-none mb-1 text-left">Search</span>
@@ -45,7 +45,7 @@ export default function HeroSearch({ onSearch, currentValue }: HeroSearchProps) 
         {/* RESET / FIND BUTTON */}
         <button 
           onClick={() => onSearch("")} // 🔥 Clears search
-          className="bg-indigo-600 text-white px-12 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[11px] flex items-center justify-center gap-3 hover:bg-slate-900 shadow-xl shadow-indigo-200 transition-all active:scale-95"
+          className="bg-indigo-600 text-white px-12 py-5 rounded-4xl font-black uppercase tracking-[0.2em] text-[11px] flex items-center justify-center gap-3 hover:bg-slate-900 shadow-xl shadow-indigo-200 transition-all active:scale-95"
         >
           <RotateCcw size={16} />
           Find Now
