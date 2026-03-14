@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${jakarta.className} bg-[#FAFAFA] text-slate-900 antialiased`}>
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
       </body>
     </html>
