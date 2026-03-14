@@ -47,7 +47,10 @@ export default function MainMarketplace({ allListings = [] }: { allListings?: an
             Experience the next generation of marketplace
           </p>
           
-          <HeroSearch onSearch={(val: string) => setSearchQuery(val)} />
+          <HeroSearch 
+  currentValue={searchQuery}
+  onSearch={(val: string) => setSearchQuery(val)} 
+/>
         </div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-50/50 rounded-full blur-[120px] -z-10"></div>
       </section>
