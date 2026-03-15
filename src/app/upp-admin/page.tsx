@@ -6,7 +6,7 @@ import {
 } from "firebase/firestore";
 import { ref as storageRef, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/lib/firebase/config";
-import { Car, Building2, Image, Phone, MapPin, Star, Trash2, Edit3, Loader2, Upload, X, Plus } from "lucide-react";
+import { Car, Building2, Image, Phone, MapPin, Star, Trash2, Edit3, Loader2, Upload, X, Plus, Zap, CheckCircle2 } from "lucide-react";
 
 // 🚗 SELLING FIELDS CONFIG (OLX Style - 6+ Images)
 const SELLING_FIELDS = [
@@ -58,6 +58,10 @@ export default function AdminPanel() {
   const [editMode, setEditMode] = useState(false);
   const [editingListing, setEditingListing] = useState<Listing | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // SEO Power Engine States
+  const [isIndexing, setIsIndexing] = useState(false);
+  const [seoStatus, setSeoStatus] = useState("");
 
   const currentFields = category === "selling" ? SELLING_FIELDS : BUSINESS_FIELDS;
   const MIN_IMAGES = category === "selling" ? 6 : 1;
@@ -124,11 +128,13 @@ export default function AdminPanel() {
       
       if (category === "selling" && selectedImages.length < MIN_IMAGES) {
         alert(`❌ Minimum ${MIN_IMAGES} images required for car listing!`);
-        setLoading(false); // Fix: Reset loading state if validation fails
+        setLoading(false); 
         return;
       }
 
+      // Generate Slug
       const slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
+      
       const expiryDate = new Date();
       if (category === "selling") {
         expiryDate.setDate(expiryDate.getDate() + 30);
@@ -136,7 +142,7 @@ export default function AdminPanel() {
         expiryDate.setMonth(expiryDate.getMonth() + 6);
       }
 
-      // Upload all images
+      // 1. Upload Images
       const imageUrls: string[] = await Promise.all(
         selectedImages.map(file => uploadImageToFirebase(file))
       );
@@ -156,6 +162,7 @@ export default function AdminPanel() {
         if (value) formObject[field.name] = value;
       }
 
+      // 2. Save to Firebase
       if (editMode && editingListing?.id) {
         await updateDoc(doc(db, "listings", editingListing.id), formObject);
         alert("✅ Listing Updated Successfully!");
@@ -163,19 +170,30 @@ export default function AdminPanel() {
         await addDoc(collection(db, "listings"), formObject);
         alert("✅ Listing Published on UPP-LINK!");
 
-        // 🔥 SEO AUTO-INDEXING PING
-        // Naya content publish hote hi Google ko sitemap scan karne ke liye notify karein
+        // 🔥🔥🔥 ELITE GOOGLE INDEXING API INTEGRATION
         try {
-          // Replace 'yourdomain.com' with your actual production URL
-          const sitemapUrl = "https://upp-link.com/sitemap.xml"; 
-          fetch(`https://www.google.com/ping?sitemap=${sitemapUrl}`, { mode: 'no-cors' });
-          console.log("🚀 Google Indexing Ping Sent!");
-        } catch (e) {
-          console.warn("Indexing ping failed, but listing is saved.");
+         const newUrl = `https://upp-link.com/listings/${slug}`;
+         
+         // Hum apne banaye hue API route ko call kar rahe hain
+         const indexResponse = await fetch("/api/index-google", {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify({ url: newUrl }),
+         });
+
+         const indexData = await indexResponse.json();
+         
+         if (indexData.success) {
+           console.log("🚀 Google Indexing Request Sent Successfully!");
+         } else {
+           console.error("⚠️ Indexing API responded with error:", indexData.error);
+         }
+        } catch (indexError) {
+         console.error("❌ Failed to notify Google Indexing API:", indexError);
         }
       }
 
-      // Reset
+      // 3. Reset UI
       (e.target as HTMLFormElement).reset();
       setImagesPreview([]);
       setSelectedImages([]);
@@ -183,6 +201,7 @@ export default function AdminPanel() {
       setEditingListing(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
       fetchListings();
+
     } catch (error) {
       alert("❌ Error: " + (error as Error).message);
     } finally {
@@ -211,6 +230,22 @@ export default function AdminPanel() {
     if (confirm("Delete this listing?")) {
       await deleteDoc(doc(db, "listings", id));
       fetchListings();
+    }
+  };
+
+  // 🔥 SEO Power Engine Function
+  const runBatchIndexing = async () => {
+    setIsIndexing(true);
+    setSeoStatus("Pushing 200 keywords to Google...");
+    
+    try {
+      const res = await fetch("/api/seo-batch", { method: "POST" });
+      const data = await res.json();
+      setSeoStatus(data.message);
+    } catch (error) {
+      setSeoStatus("Error running batch.");
+    } finally {
+      setIsIndexing(false);
     }
   };
 
@@ -349,10 +384,42 @@ export default function AdminPanel() {
           </div>
 
           {/* Listings Management - Updated for multiple images */}
-          <div className="lg:col-span-1 bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border max-h-[80vh] overflow-y-auto">
+          <div className="lg:col-span-1 bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border max-h-[80vh] overflow-y-auto space-y-6">
             <h2 className="text-2xl font-black text-slate-900 mb-6 sticky top-0 bg-white/50 backdrop-blur p-4 rounded-xl">
               📋 All Listings ({listings.length})
             </h2>
+            
+            {/* 🔥 SEO POWER ENGINE - Integrated at the top of management panel */}
+            <div className="p-10 bg-slate-900 rounded-[3rem] border border-indigo-500/30 shadow-2xl shadow-indigo-900/20 mb-8">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-black text-white uppercase italic tracking-tighter flex items-center gap-3">
+                    <Zap className="text-indigo-400" fill="currentColor" size={28} /> SEO Power Engine
+                  </h3>
+                  <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">
+                    Daily Google Indexing Limit: 200 URLs
+                  </p>
+                </div>
+
+                <button 
+                  onClick={runBatchIndexing}
+                  disabled={isIndexing}
+                  className={`px-10 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 transition-all active:scale-95
+                    ${isIndexing ? 'bg-slate-800 text-slate-500 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-white hover:text-slate-900 shadow-xl shadow-indigo-500/20'}`}
+                >
+                  {isIndexing ? <Loader2 className="animate-spin" size={16} /> : <Zap size={16} />}
+                  {isIndexing ? "Indexing Now..." : "Push Batch to Google"}
+                </button>
+              </div>
+
+              {seoStatus && (
+                <div className="mt-6 flex items-center gap-3 text-emerald-400 text-[10px] font-black uppercase tracking-widest bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/20">
+                  <CheckCircle2 size={14} /> {seoStatus}
+                </div>
+              )}
+            </div>
+
+            {/* Existing Listings List */}
             <div className="space-y-4">
               {listings.map((listing) => (
                 <div key={listing.id} className="group p-6 rounded-3xl border border-slate-100 hover:shadow-2xl hover:border-indigo-200 transition-all">
