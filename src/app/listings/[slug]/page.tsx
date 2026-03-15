@@ -27,7 +27,7 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
   const isCar = data.type === 'selling';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-indigo-50/30">
       
       {/* 🔥 PERFECT SPACING CONTAINER */}
       <div className="pt-24 lg:pt-32 pb-24">
@@ -35,7 +35,7 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
         {/* 🔥 MOBILE HEADER */}
         <section className="lg:hidden px-6 pb-12 mb-12 bg-white/90 backdrop-blur-xl rounded-b-3xl shadow-xl border-b border-slate-200">
           <div className="text-center max-w-md mx-auto">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-2xl mb-8 shadow-2xl mx-auto font-bold text-sm uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 bg-linear-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-2xl mb-8 shadow-2xl mx-auto font-bold text-sm uppercase tracking-wide">
               {isCar ? <Car size={20} /> : <Store size={20} />}
               {isCar ? 'Car Listing' : 'Business Directory'}
             </div>
@@ -61,7 +61,7 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between gap-12 py-8">
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-2xl text-sm font-bold uppercase tracking-wide mb-6 shadow-xl">
+                <div className="flex items-center gap-3 bg-linear-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-2xl text-sm font-bold uppercase tracking-wide mb-6 shadow-xl">
                   {isCar ? <Car size={20} /> : <Store size={20} />}
                   <span>{isCar ? 'Premium Automobile' : 'Verified Business'}</span>
                 </div>
@@ -69,7 +69,7 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
                   {isCar ? data.listingTitle : data.businessName}
                 </h1>
               </div>
-              <div className="text-right flex-shrink-0 min-w-[240px]">
+              <div className="text-right shrink-0 min-w-60">
                 {data.price && (
                   <div className="text-5xl xl:text-6xl font-black text-emerald-600 mb-6 leading-none bg-emerald-50 px-8 py-4 rounded-3xl shadow-2xl">
                     ₹{data.price}
@@ -109,7 +109,7 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
               {isCar && (
                 <div className="bg-white rounded-3xl p-10 lg:p-14 shadow-2xl border border-slate-100 hover:shadow-3xl transition-all duration-500 overflow-hidden">
                   <h3 className="text-3xl lg:text-4xl font-black text-slate-900 mb-14 flex items-center gap-4">
-                    <div className="w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-3xl flex items-center justify-center shadow-2xl">
+                    <div className="w-14 h-14 lg:w-16 lg:h-16 bg-linear-to-br from-indigo-500 to-indigo-600 rounded-3xl flex items-center justify-center shadow-2xl">
                       <Gauge className="w-8 h-8 lg:w-9 lg:h-9 text-white" />
                     </div>
                     Specifications
@@ -132,10 +132,10 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
                 <div className="bg-white rounded-3xl p-12 lg:p-16 shadow-2xl border border-slate-100 hover:shadow-3xl transition-all duration-500">
                   <h3 className="text-3xl lg:text-4xl font-black text-slate-900 mb-12 flex items-center gap-4">
                     {isCar ? 
-                      <div className="w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-3xl flex items-center justify-center shadow-2xl">
+                      <div className="w-14 h-14 lg:w-16 lg:h-16 bg-linear-to-br from-indigo-500 to-blue-600 rounded-3xl flex items-center justify-center shadow-2xl">
                         <Info className="w-8 h-8 lg:w-9 lg:h-9 text-white" />
                       </div> : 
-                      <div className="w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-emerald-500 to-green-600 rounded-3xl flex items-center justify-center shadow-2xl">
+                      <div className="w-14 h-14 lg:w-16 lg:h-16 bg-linear-to-br from-emerald-500 to-green-600 rounded-3xl flex items-center justify-center shadow-2xl">
                         <ShieldCheck className="w-8 h-8 lg:w-9 lg:h-9 text-white" />
                       </div>
                     }
@@ -153,10 +153,10 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
               
               {/* 🔥 PRIMARY CALL BUTTON */}
               <div className="group">
-                <div className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 rounded-3xl p-2 shadow-3xl group-hover:shadow-4xl group-hover:scale-[1.02] transition-all duration-500 border border-indigo-500/30">
+                <div className="bg-linear-to-r from-indigo-600 via-indigo-700 to-purple-700 rounded-3xl p-2 shadow-3xl group-hover:shadow-4xl group-hover:scale-[1.02] transition-all duration-500 border border-indigo-500/30">
                   <a 
                     href={`tel:${data.contact}`}
-                    className="block w-full bg-white text-indigo-700 rounded-2xl p-12 lg:p-14 text-center font-black text-2xl lg:text-3xl uppercase tracking-[0.1em] shadow-3xl hover:bg-indigo-50 hover:shadow-4xl hover:scale-[1.02] transition-all duration-500 border-4 border-indigo-200/50"
+                    className="block w-full bg-white text-indigo-700 rounded-2xl p-12 lg:p-14 text-center font-black text-2xl lg:text-3xl uppercase tracking-widest shadow-3xl hover:bg-indigo-50 hover:shadow-4xl hover:scale-[1.02] transition-all duration-500 border-4 border-indigo-200/50"
                   >
                     <Phone className="w-20 h-20 lg:w-24 lg:h-24 mx-auto mb-8 text-indigo-600 shadow-3xl group-hover:rotate-12 group-hover:scale-110 transition-all duration-700" />
                     <div>Call Directly</div>
@@ -167,7 +167,7 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
 
               {/* 🔥 PRICE CARD */}
               {data.price && (
-                <div className="bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 text-white rounded-3xl p-12 lg:p-16 shadow-4xl hover:shadow-5xl hover:scale-[1.02] transition-all duration-500 text-center border-4 border-emerald-600/50">
+                <div className="bg-linear-to-r from-emerald-500 via-emerald-600 to-emerald-700 text-white rounded-3xl p-12 lg:p-16 shadow-4xl hover:shadow-5xl hover:scale-[1.02] transition-all duration-500 text-center border-4 border-emerald-600/50">
                   <div className="text-6xl lg:text-7xl font-black leading-none mb-6 drop-shadow-4xl">₹{data.price}</div>
                   <div className="text-2xl uppercase tracking-[0.2em] font-black">Final Price</div>
                   <div className="text-emerald-100 text-lg font-semibold mt-2">Ready To Drive</div>
@@ -177,7 +177,7 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
               {/* 🔥 LOCATION */}
               <div className="bg-white rounded-3xl p-10 lg:p-12 shadow-3xl border border-slate-100/70 hover:shadow-4xl hover:-translate-y-2 transition-all duration-500">
                 <div className="flex items-center gap-5 mb-8">
-                  <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-3xl flex items-center justify-center shadow-2xl flex-shrink-0">
+                  <div className="w-16 h-16 lg:w-20 lg:h-20 bg-linear-to-br from-indigo-500 to-indigo-600 rounded-3xl flex items-center justify-center shadow-2xl shrink-0">
                     <MapPin className="w-9 h-9 lg:w-10 lg:h-10 text-white" />
                   </div>
                   <h4 className="font-black text-2xl lg:text-3xl text-slate-900">Location</h4>
@@ -192,16 +192,16 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
 
               {/* 🔥 PREMIUM BADGE */}
               {data.isPremium && (
-                <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-white p-12 lg:p-16 rounded-3xl shadow-4xl hover:shadow-5xl hover:scale-[1.05] transition-all duration-500 text-center border-4 border-amber-400/50">
+                <div className="bg-linear-to-r from-amber-500 via-orange-500 to-yellow-500 text-white p-12 lg:p-16 rounded-3xl shadow-4xl hover:shadow-5xl hover:scale-[1.05] transition-all duration-500 text-center border-4 border-amber-400/50">
                   <Star className="w-20 h-20 lg:w-24 lg:h-24 mx-auto mb-8 fill-current shadow-4xl drop-shadow-4xl" />
                   <div className="font-black text-3xl lg:text-4xl mb-4">Premium Verified</div>
-                  <div className="text-2xl text-amber-100 uppercase tracking-[0.1em] font-bold">Admin Approved</div>
+                  <div className="text-2xl text-amber-100 uppercase tracking-widest font-bold">Admin Approved</div>
                 </div>
               )}
 
               {/* 🔥 BUSINESS STATUS */}
               {!isCar && (
-                <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white p-12 lg:p-16 rounded-3xl shadow-4xl hover:shadow-5xl transition-all duration-500 text-center">
+                <div className="bg-linear-to-r from-emerald-500 to-teal-500 text-white p-12 lg:p-16 rounded-3xl shadow-4xl hover:shadow-5xl transition-all duration-500 text-center">
                   <div className="flex items-center justify-center gap-6 mb-8">
                     <Clock className="w-16 h-16 lg:w-20 lg:h-20 shadow-4xl" />
                     <span className="font-black text-3xl uppercase tracking-[0.2em]">Open 24/7</span>
@@ -227,8 +227,8 @@ function SpecCard({ icon: Icon, label, title }: {
   title: string 
 }) {
   return (
-    <div className="group relative p-10 lg:p-12 rounded-3xl bg-gradient-to-b from-slate-50/80 to-indigo-50/50 hover:from-indigo-50 hover:to-purple-50 border-2 border-slate-100/60 hover:border-indigo-300/70 hover:shadow-3xl hover:shadow-indigo-200/40 hover:-translate-y-4 transition-all duration-700 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/5 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-all duration-700" />
+    <div className="group relative p-10 lg:p-12 rounded-3xl bg-linear-to-b from-slate-50/80 to-indigo-50/50 hover:from-indigo-50 hover:to-purple-50 border-2 border-slate-100/60 hover:border-indigo-300/70 hover:shadow-3xl hover:shadow-indigo-200/40 hover:-translate-y-4 transition-all duration-700 overflow-hidden">
+      <div className="absolute inset-0 bg-linear-to-r from-indigo-500/10 via-purple-500/5 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-all duration-700" />
       <div className="relative z-10 text-center">
         <div className="w-20 h-20 lg:w-24 lg:h-24 mx-auto mb-8 bg-white/90 rounded-3xl flex items-center justify-center shadow-2xl group-hover:shadow-3xl group-hover:bg-indigo-100 group-hover:scale-110 transition-all duration-700 border-4 border-white/50 group-hover:border-indigo-200/50">
           <Icon className="w-12 h-12 lg:w-14 lg:h-14 text-indigo-600 group-hover:scale-110 group-hover:rotate-12 transition-all duration-700" />
@@ -253,12 +253,12 @@ function NoImageBanner({
   businessName: string 
 }) {
   return (
-    <div className="relative h-[280px] sm:h-[380px] lg:h-[520px] xl:h-[600px] overflow-hidden group">
+    <div className="relative h-70 sm:h-95 lg:h-130 xl:h-150 overflow-hidden group">
       {/* Animated Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-100/90 via-indigo-50/80 to-purple-50/70 animate-gradient-xy" />
+      <div className="absolute inset-0 bg-linear-to-br from-slate-100/90 via-indigo-50/80 to-purple-50/70 animate-gradient-xy" />
       
       {/* Shine Animation */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent h-full w-[200%] animate-shimmer" />
+      <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent h-full w-[200%] animate-shimmer" />
       
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-8 text-center max-w-2xl mx-auto">
@@ -272,7 +272,7 @@ function NoImageBanner({
         </div>
         
         {/* Business Title */}
-        <h3 className="text-2xl lg:text-3xl xl:text-4xl font-black text-slate-900 mb-4 bg-gradient-to-r from-slate-900 to-indigo-900 bg-clip-text text-transparent animate-slide-up">
+        <h3 className="text-2xl lg:text-3xl xl:text-4xl font-black text-slate-900 mb-4 bg-linear-to-r from-slate-900 to-indigo-900 bg-clip-text animate-slide-up">
           {businessName}
         </h3>
         
@@ -285,7 +285,7 @@ function NoImageBanner({
         </p>
         
         {/* CTA Badge */}
-        <div className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-black uppercase tracking-wider text-sm lg:text-base rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 animate-pulse-slow border-2 border-indigo-500/30">
+        <div className="inline-flex items-center gap-3 px-8 py-4 bg-linear-to-r from-indigo-600 to-purple-600 text-white font-black uppercase tracking-wider text-sm lg:text-base rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 animate-pulse-slow border-2 border-indigo-500/30">
           <Phone className="w-5 h-5" />
           📞 Call Now for Details
         </div>
