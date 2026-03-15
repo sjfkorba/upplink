@@ -91,18 +91,17 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
             {/* 🔥 MAIN CONTENT */}
             <div className="lg:col-span-2 space-y-12 lg:space-y-16">
               
-              {/* 🔥 IMAGE GALLERY - PERFECT SIZE */}
+              {/* 🔥 SMART IMAGE BANNER - Images ya Animated Placeholder */}
               <div className="w-full bg-white border-2 border-slate-100 rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-500">
-                {isCar && data.images && data.images.length > 0 ? (
+                {data.images && data.images.length > 0 ? (
+                  // 🔥 REAL IMAGES EXIST - Show ImageGallery
                   <ImageGallery images={data.images} />
                 ) : (
-                  <div className="h-[280px] sm:h-[380px] lg:h-[520px] xl:h-[600px] bg-gradient-to-br from-slate-100/80 to-indigo-100/60 flex items-center justify-center p-12 rounded-3xl">
-                    <div className="text-center max-w-md mx-auto">
-                      <Store className="w-28 h-28 lg:w-36 lg:h-36 mx-auto mb-8 text-slate-400 shadow-2xl" />
-                      <h3 className="text-2xl lg:text-3xl font-bold text-slate-800 mb-3">Visual Preview</h3>
-                      <p className="text-xl text-slate-600 font-medium">Contact seller for photos</p>
-                    </div>
-                  </div>
+                  // 🔥 NO IMAGES - Professional Animated Placeholder
+                  <NoImageBanner 
+                    isCar={isCar} 
+                    businessName={isCar ? data.listingTitle : data.businessName} 
+                  />
                 )}
               </div>
 
@@ -221,7 +220,7 @@ export default async function ListingDetail({ params }: { params: Promise<{ slug
   );
 }
 
-// 🔥 PERFECT SPEC CARD
+// 🔥 SPEC CARD COMPONENT
 function SpecCard({ icon: Icon, label, title }: { 
   icon: any; 
   label: string; 
@@ -241,6 +240,60 @@ function SpecCard({ icon: Icon, label, title }: {
           {title}
         </div>
       </div>
+    </div>
+  );
+}
+
+// 🔥 PROFESSIONAL ANIMATED NO-IMAGE BANNER
+function NoImageBanner({ 
+  isCar, 
+  businessName 
+}: { 
+  isCar: boolean; 
+  businessName: string 
+}) {
+  return (
+    <div className="relative h-[280px] sm:h-[380px] lg:h-[520px] xl:h-[600px] overflow-hidden group">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-100/90 via-indigo-50/80 to-purple-50/70 animate-gradient-xy" />
+      
+      {/* Shine Animation */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent h-full w-[200%] animate-shimmer" />
+      
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-8 text-center max-w-2xl mx-auto">
+        {/* Animated Icon */}
+        <div className="w-28 h-28 lg:w-36 lg:h-36 mb-8 p-6 lg:p-8 bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border-4 border-white/50 animate-bounce-slow group-hover:scale-110 transition-all duration-700 flex items-center justify-center">
+          {isCar ? (
+            <Car className="w-16 h-16 lg:w-20 lg:h-20 text-indigo-600 drop-shadow-lg animate-pulse" />
+          ) : (
+            <Store className="w-16 h-16 lg:w-20 lg:h-20 text-emerald-600 drop-shadow-lg animate-pulse" />
+          )}
+        </div>
+        
+        {/* Business Title */}
+        <h3 className="text-2xl lg:text-3xl xl:text-4xl font-black text-slate-900 mb-4 bg-gradient-to-r from-slate-900 to-indigo-900 bg-clip-text text-transparent animate-slide-up">
+          {businessName}
+        </h3>
+        
+        {/* Subtitle */}
+        <p className="text-lg lg:text-xl text-slate-600 font-semibold mb-6 animate-slide-up-delayed">
+          {isCar 
+            ? "High-Quality Photos Coming Soon" 
+            : "Contact Owner for Gallery & Details"
+          }
+        </p>
+        
+        {/* CTA Badge */}
+        <div className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-black uppercase tracking-wider text-sm lg:text-base rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 animate-pulse-slow border-2 border-indigo-500/30">
+          <Phone className="w-5 h-5" />
+          📞 Call Now for Details
+        </div>
+      </div>
+      
+      {/* Floating Elements */}
+      <div className="absolute top-10 left-10 w-20 h-20 lg:w-24 lg:h-24 bg-indigo-200/60 rounded-2xl animate-float blur-sm" />
+      <div className="absolute bottom-20 right-10 w-16 h-16 lg:w-20 lg:h-20 bg-emerald-200/50 rounded-full animate-float-delayed blur-sm" />
     </div>
   );
 }
