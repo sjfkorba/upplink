@@ -6,8 +6,8 @@ import Navbar from "@/components/Navbar";
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "UPP-LINK | Premium Car & Business Marketplace",
-  description: "India's most elite marketplace for cars and verified businesses.",
+  title: "UPPLINK: Verified Business Listings & Used Cars in CG & MP",
+  description: "UPPLINK is India's most elite marketplace to buy/sell cars & discover verified businesses in Chhattisgarh & Madhya Pradesh. List your business for free today!",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
