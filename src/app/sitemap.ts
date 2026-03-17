@@ -3,7 +3,8 @@ import { db } from "@/lib/firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://upp-link.com";
+  // FIXED: Abhi ke liye Vercel link use karein, baad mein domain connect hote hi badal dena
+  const baseUrl = "https://upplink.vercel.app"; 
 
   // 1. Static Core Routes
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -16,11 +17,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let listingRoutes: MetadataRoute.Sitemap = [];
   try {
     const snapshot = await getDocs(collection(db, "listings"));
-    listingRoutes = snapshot.docs.map((doc) => {
-      const data = doc.data();
+    listingRoutes = snapshot.docs.map((docSnap) => {
+      const data = docSnap.data();
+      // ID ya Slug jo bhi aap use kar rahe hain
+      const identifier = data.slug || docSnap.id; 
+      
       return {
-        url: `${baseUrl}/listings/${data.slug}`,
-        lastModified: data.createdAt?.toDate() || new Date(),
+        url: `${baseUrl}/listings/${identifier}`,
+        lastModified: data.updatedAt?.toDate() || data.createdAt?.toDate() || new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
       };
@@ -29,20 +33,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error("Firebase Sitemap Error:", e);
   }
 
-  // 3. Programmatic SEO Routes (From your Keyword Strategy)
-  // Hum in keywords ko /search?q=... routes mein convert karenge
-  const cities = [
-    "Raipur", "Bhilai", "Bilaspur", "Korba", "Durg", "Raigarh",
-    "Indore", "Bhopal", "Jabalpur", "Gwalior", "Ujjain", "Rewa"
-  ];
-
-  const services = [
-    "Used Cars", "Car Dealer", "Mechanic", "Hospital", 
-    "Electronic Shop", "Real Estate", "Jewellery Shop", "Salon"
-  ];
+  // 3. Programmatic SEO Routes (Advanced Keywords)
+  const cities = ["Korba", "Raipur", "Bilaspur", "Bhilai", "Indore", "Bhopal"];
+  const services = ["Cab Service", "Taxi Service", "Used Cars", "Car Dealer"];
 
   const pSeoRoutes: MetadataRoute.Sitemap = [];
-
   cities.forEach(city => {
     services.forEach(service => {
       const query = encodeURIComponent(`${service} in ${city}`.toLowerCase());
@@ -55,6 +50,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   });
 
-  // Combine All: Total URLs can reach 10k+ easily
   return [...staticRoutes, ...listingRoutes, ...pSeoRoutes];
 }
