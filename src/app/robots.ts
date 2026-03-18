@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin', '/login', '/api/'], // Private pages hide karein
     },
-    sitemap: 'https://upp-link.com/sitemap.xml',
+    sitemap: 'https://upplink.vercel.app/sitemap.xml',
   };
 }
